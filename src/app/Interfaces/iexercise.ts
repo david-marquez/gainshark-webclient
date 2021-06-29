@@ -1,4 +1,4 @@
-import { IMuscleGroup } from './imusclegroup';
+import { IMuscleGroup } from './IMuscleGroup';
 
 export interface IExercise {
     Id: number,

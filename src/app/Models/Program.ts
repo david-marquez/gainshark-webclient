@@ -1,0 +1,10 @@
+import { IExercise } from "../Interfaces/IExercise";
+import { IProgram } from "../Interfaces/IProgram";
+
+export class Program implements IProgram {
+    Id: number;
+    UserId: number;
+    Name: string;
+    Description: string;
+    Exercises: IExercise[];
+}

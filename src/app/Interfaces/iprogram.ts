@@ -1,4 +1,4 @@
-import { IExercise } from './iexercise';
+import { IExercise } from './IExercise';
 
 export interface IProgram {
     Id: number,

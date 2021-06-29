@@ -1,18 +1,131 @@
-<div class="login-container">
-    <p class="login-header">Gain Shark Login</p>
+<div class="container">
+  <div class="login-card">
+
+    <div class="title"><span>Gain Shark Login</span></div>
+
+      <form
+        #userLogin = "ngForm" 
+        class="login-form">
+        <div 
+          hidden
+          id="name-container"
+          class="row form-group">
+          <i class="fa fa-id-card row-icon"></i>
+          <input
+            required 
+            ngModel 
+            name="name" 
+            #name="ngModel" 
+            id="name"
+            type="text" 
+            class="login-input form-control" 
+            placeholder="Name">
+        </div>
+
+        <div 
+          hidden
+          id="email-container"
+          class="row form-group">
+          <i class="fa fa-envelope row-icon"></i>
+          <input
+            required
+            pattern="[a-z0-9._%+-]+@[a-z0-9z.-]+\.[a-z]{2,}$"
+            ngModel 
+            name="email" 
+            #email="ngModel" 
+            id="email"
+            type="email" 
+            class="login-input form-control" 
+            placeholder="Email Address">
+        </div>
+        <div 
+          class="alert-banner" 
+          *ngIf="email.touched && !email.valid">
+          <div *ngIf="email.errors.pattern">
+            Email address must look like sample@mail.com
+          </div>
+        </div>
+
+        <div class="row form-group">
+          <i class="fa fa-user row-icon"></i>
+          <input
+            required 
+            pattern="[^'\x22\s%@]+"
+            ngModel 
+            name="username" 
+            #username="ngModel" 
+            id="username"
+            type="text" 
+            class="login-input form-control" 
+            placeholder="Username">
+        </div>
+        <div 
+          class="alert-banner" 
+          *ngIf="username.touched && !username.valid">
+          <div *ngIf="username.errors.required">
+            Username is required
+          </div>
+          <div *ngIf="username.errors.pattern">
+            Username can only have letters, numbers, and underscores
+          </div>
+        </div>
   
-    <div class="login-content">
-      <label>First Name: </label>
-      <input type="text" class="login-input">
-    
-      <label>Last Name: </label>
-      <input type="text" class="login-input">
+        <div class="row form-group">
+          <i class="fa fa-lock row-icon"></i>
+          <input 
+            required 
+            minlength="8"
+            maxlength="24"
+            ngModel 
+            name="password" 
+            #password="ngModel"
+            id="password" 
+            type="password" 
+            class="login-input form-control" 
+            placeholder="Password">
+        </div>
+        <div 
+          class="alert-banner" 
+          *ngIf="password.touched && !password.valid">
+          <div *ngIf="password.errors.required">
+            Password is required
+          </div>
+          <div *ngIf="password.errors.minlength">
+            Password should be at least {{ password.errors.minlength.requiredLength }} characters
+          </div>
+        </div>
   
-      <label>Email Address: </label>
-      <input type="text" class="login-input">
+        <div class="row">
+          <div class="btn-grid">
+            <button 
+              id="btn-login"
+              class="btn btn-login"
+              type="button"
+              (click)="buildUser(userLogin)">
+              Login
+            </button>
+            <p class="btn-divider">or</p>
+            <button 
+              id="btn-signUp"
+              class="btn btn-sign-up" 
+              type="button"
+              (click)="signUp(userLogin)">
+              Sign Up
+            </button>
+          </div>
+        </div>
   
-      <label>Password: </label>
-      <input type="text" class="login-input">
-    </div>
+        <!--<div class="row">
+          <button class="button demo-button" type="button">Demo Login</button>
+        </div>-->
+        <div class="demo-link">
+          Want to preview Gain Shark? 
+          <a class="hyper-text" href="#">
+            Demo now
+          </a>
+        </div>
+
+      </form>
   
   </div>
+</div>
