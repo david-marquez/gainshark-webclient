@@ -1,0 +1,41 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.header-bar {
+    margin-bottom: 1em;
+    border: solid;
+    border-width: 0;
+    border-bottom-width: 1px;
+    border-color: rgb(67, 203, 212);
+    padding-bottom: .5em;
+
+    .title {
+        line-height: 1.5em;
+        font-size: 1.5em;
+    }
+}
+
+.program-details {
+
+    .exercise-container {
+
+        .exercise-card {
+            list-style-type: none;
+            display: grid;
+            grid-template-columns: 40% 20% 20% 20%;
+            margin-bottom: .75em;
+        }
+
+        .exercise-header {
+            margin-bottom: 1em;
+            border: solid;
+            border-width: 0;
+            border-bottom-width: 1px;
+            border-color: rgb(211, 211, 211);
+            padding-bottom: .25em;
+        }
+    }
+}

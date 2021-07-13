@@ -12,14 +12,17 @@
     //background: #f39c12;
     
     .login-card {
-        width: 25em;
+        width: 30em;
         background: rgb(255, 255, 255);
         border-radius: 5px;
-        box-shadow: 2px 5px 5px 5px rgba(53, 41, 16, 0.404);
+        box-shadow: 2px 1px 1px 1px rgba(53, 41, 16, 0.12),
+                    2px 2px 2px 2px rgba(53, 41, 16, 0.12),
+                    2px 4px 4px 4px rgba(53, 41, 16, 0.12),
+                    2px 8px 8px 8px rgba(53, 41, 16, 0.12);
 
         .title {
             line-height: 3em;
-            background: rgb(230, 126, 34);
+            background: rgb(83, 234, 245);
             padding: 0 1em 0 1em;
             border-radius: 5px 5px 0 0;
             font-size: 1.75em;
@@ -41,8 +44,8 @@
                     height: 100%;
                     font-size: 1.25em;
                     display: flex;
-                    background: rgb(230, 126, 34);
-                    border: 1px solid rgb(230, 126, 34);
+                    background: rgb(83, 234, 245);
+                    border: 1px solid rgb(83, 234, 245);
                     align-items: center;
                     justify-content: center;
                     border-radius: 5px 0 0 5px;
@@ -60,18 +63,9 @@
                 }
 
                 .login-input:focus {
-                    border-color: rgb(230, 126, 34);
-                    box-shadow: inset 0px 0px 2px 2px rgba(209, 124, 12, 0.25);
+                    border-color: rgb(83, 234, 245);
+                    box-shadow: inset 0px 0px 2px 2px rgba(12, 153, 209, 0.25);
                 }
-
-                /*.demo-button {
-                    height: 100%;
-                    width: 100%;
-                    font-size: 1em;
-                    font-weight: 600;
-                    border-radius: 5px;
-                    border: 1px solid lightgrey;
-                }*/
 
                 .btn-grid {
                     display: grid;
@@ -80,6 +74,7 @@
                     column-gap: 1em;
 
                     .btn {
+                        height: 2.5em;
                         font-size: 1em;
                         font-weight: 600;
                         border-radius: 5px;
@@ -102,13 +97,13 @@
                     }
 
                     .btn-login {
-                        background: rgb(230, 126, 34);
-                        border: 1px solid rgb(230, 126, 34);
+                        background: rgb(83, 234, 245);
+                        border: 1px solid rgb(83, 234, 245);
                     }
 
                     .btn-login:hover {
-                        background: rgb(209, 106, 16);
-                        border: rgb(209, 106, 16);
+                        background: rgb(67, 203, 212);
+                        border: rgb(67, 203, 212);
                     }
                 }
             }
@@ -132,12 +127,13 @@
                 font-size: 1em;
 
                 .hyper-text {
-                    color: rgb(243, 156, 18);
+                    color: rgb(43, 204, 216);
                     text-decoration: none;
                 }
 
                 .hyper-text:hover {
                     text-decoration: underline;
+                    cursor: pointer;
                 }
             }
         }

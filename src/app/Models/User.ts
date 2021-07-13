@@ -6,7 +6,7 @@ export class User implements IUser {
     Id: number;
     FirstName: string;
     LastName: string;
-    Username: string;
+    UserName: string;
     Email: string;
     Password: string;
     Role: IRole;

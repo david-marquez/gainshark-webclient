@@ -1,0 +1,26 @@
+<div class="header-bar">
+    <div class="title">
+        <span>{{ program?.Name }}</span>
+    </div>
+</div>
+
+<div class="program-details">
+
+    <ul class="exercise-container">
+        <li class="exercise-card exercise-header">
+            <p>Exercise</p>
+            <p>Sets</p>
+            <p>Reps</p>
+            <p>Weight</p>
+        </li>
+
+        <li
+          *ngFor="let exercise of program.Exercises"
+          class="exercise-card">
+            <p>{{ exercise?.Name }}</p>
+            <p>{{ exercise?.Sets }}</p>
+            <p>{{ exercise?.Reps }}</p>
+            <p>{{ exercise?.Weight }}</p>
+        </li>
+    </ul>
+</div>

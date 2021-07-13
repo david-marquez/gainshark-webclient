@@ -1,0 +1,29 @@
+<div class="header-bar">
+  <div class="title">
+    <span>Programs</span>
+  </div>
+
+  <button
+    id="btn-add-program"
+    class="btn-add-program">
+    +
+  </button>
+</div>
+
+<div class="program-panel">
+  <ul class="program-container">
+    <li
+      *ngFor="let program of user.Programs"
+      class="program-card"
+      routerLink="./{{program.Id}}">
+        <a class="program-name">
+          {{ program?.Name }}
+        </a>
+
+        <p class="program-description">
+          {{ program?.Description }}
+        </p>
+    </li>
+  </ul>
+</div>
+

@@ -12,14 +12,13 @@
           class="row form-group">
           <i class="fa fa-id-card row-icon"></i>
           <input
-            required 
             ngModel 
             name="name" 
             #name="ngModel" 
             id="name"
             type="text" 
             class="login-input form-control" 
-            placeholder="Name">
+            placeholder="Name (Optional)">
         </div>
 
         <div 
@@ -41,6 +40,9 @@
         <div 
           class="alert-banner" 
           *ngIf="email.touched && !email.valid">
+          <div *ngIf="email.errors.required">
+            Email address is required
+          </div>
           <div *ngIf="email.errors.pattern">
             Email address must look like sample@mail.com
           </div>
@@ -52,20 +54,20 @@
             required 
             pattern="[^'\x22\s%@]+"
             ngModel 
-            name="username" 
-            #username="ngModel" 
-            id="username"
+            name="userName" 
+            #userName="ngModel" 
+            id="userName"
             type="text" 
             class="login-input form-control" 
             placeholder="Username">
         </div>
         <div 
           class="alert-banner" 
-          *ngIf="username.touched && !username.valid">
-          <div *ngIf="username.errors.required">
+          *ngIf="userName.touched && !userName.valid">
+          <div *ngIf="userName.errors.required">
             Username is required
           </div>
-          <div *ngIf="username.errors.pattern">
+          <div *ngIf="userName.errors.pattern">
             Username can only have letters, numbers, and underscores
           </div>
         </div>
@@ -74,7 +76,8 @@
           <i class="fa fa-lock row-icon"></i>
           <input 
             required 
-            minlength="8"
+            pattern="[^'\x22\s%@]+"
+            minlength="6"
             maxlength="24"
             ngModel 
             name="password" 
@@ -93,18 +96,28 @@
           <div *ngIf="password.errors.minlength">
             Password should be at least {{ password.errors.minlength.requiredLength }} characters
           </div>
+          <div *ngIf="password.errors.pattern">
+            Password can only have letters, numbers, and underscores
+          </div>
         </div>
+        <!--<div
+          id="login-alert"
+          class="login-alert alert-banner">
+          {{ loginAlertMessage }}
+        </div>-->
   
         <div class="row">
           <div class="btn-grid">
             <button 
               id="btn-login"
               class="btn btn-login"
-              type="button"
-              (click)="buildUser(userLogin)">
+              type="submit"
+              (click)="login(userLogin)">
               Login
             </button>
+
             <p class="btn-divider">or</p>
+
             <button 
               id="btn-signUp"
               class="btn btn-sign-up" 
@@ -115,12 +128,11 @@
           </div>
         </div>
   
-        <!--<div class="row">
-          <button class="button demo-button" type="button">Demo Login</button>
-        </div>-->
         <div class="demo-link">
           Want to preview Gain Shark? 
-          <a class="hyper-text" href="#">
+          <a 
+            class="hyper-text" 
+            (click)="demoLogin()">
             Demo now
           </a>
         </div>
