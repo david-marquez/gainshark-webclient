@@ -1,6 +1,10 @@
 <div class="header-bar">
     <div class="title">
-        <span>Hi, {{ user?.UserName }}!</span>
+        <span 
+            class="home-link"
+            (click)="navHome()">
+            Hi, {{ user?.UserName }}
+        </span>
     </div>
 </div>
 

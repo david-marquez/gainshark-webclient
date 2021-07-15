@@ -1,0 +1,93 @@
+<div class="header-bar">
+    <div class="title">
+        <input
+            name="Name"
+            id="Name"
+            type="text"
+            class="login-input header-input form-control"
+            placeholder="Program Name"
+            required>
+    </div>
+
+    <button
+        id="btn-create-program"
+        class="btn btn-create-program"
+        type="submit"
+        (click)="createProgram();">
+        Create Program
+    </button>
+    
+    <textarea
+        id="Description"
+        class="program-description"
+        placeholder="Program Description"></textarea>
+</div>
+
+<div 
+    id="program-details"
+    class="program-details">
+
+    <div class="exercise-card exercise-header">
+        <p>Exercise</p>
+        <p>Sets</p>
+        <p>Reps</p>
+        <p>Weight</p>
+    </div>
+
+    <ul class="exercise-container">    
+        <li 
+          *ngFor="let programExercise of program.Exercises" 
+          class="exercise-card program-exercise">
+            <p class="exercise-field program-exercise-name">
+                {{ programExercise?.Name }}
+            </p>
+            <input 
+                class="exercise-field exercise-input program-exercise-sets"
+                type="text"
+                placeholder="Sets">
+            <input 
+                class="exercise-field exercise-input program-exerecise-reps"
+                type="text"
+                placeholder="Reps">
+            <input 
+                class="exercise-field exercise-input program-exercise-weight"
+                type="text"
+                placeholder="Weight">
+        </li>
+    </ul>
+
+</div>
+
+<div class="add-exercise-container">
+    <div
+        id="search-container"
+        class="search-container"
+        hidden>
+        <input
+            id="exercise-search"
+            [(ngModel)]="exerciseFilter"
+            class="search-field"
+            placeholder="Search exercises...">
+
+        <ul 
+            id="exercise-list"
+            class="exercise-list">
+            <li 
+                *ngFor="let exercise of availableExercises | genericFilter: 'Name': exerciseFilter"
+                class="exercise"
+                (click)="addExercise(exercise)">
+                <p class="exercise-name">
+                    {{ exercise?.Name }}
+                </p>
+            </li>
+        </ul>
+    </div>
+
+    <button
+        id="btn-add-exercise"
+        class="btn btn-add-exercise"
+        type="button"
+        (click)="showExerciseList()">
+        Add Exercise
+    </button>
+</div>

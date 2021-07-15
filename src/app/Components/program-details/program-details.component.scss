@@ -15,6 +15,19 @@
     .title {
         line-height: 1.5em;
         font-size: 1.5em;
+        margin-bottom: 1em;
+    }
+
+    .program-description {
+        resize: none;
+        border-style: none;
+        font-family: 'Roboto', sans-serif;
+        font-size: 1em;
+        padding-bottom: .5em;
+    }
+
+    .program-description:focus {
+        outline: none;
     }
 }
 

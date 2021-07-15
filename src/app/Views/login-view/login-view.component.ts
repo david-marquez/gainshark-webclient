@@ -62,7 +62,7 @@ export class LoginViewComponent implements OnInit {
   processLoginResponse(response: HttpResponse<IUser>) {
     if(response.status == 200) {
       this.userHandoff.changeUser(this.user);
-      this.router.navigate([`users/${this.user.UserName}/programs`]);
+      this.router.navigate([`portal/${this.user.UserName}/programs`]);
     }
     else if(response.status == 401) {
       this.loginAlertMessage = 'Invalid UserName or password';

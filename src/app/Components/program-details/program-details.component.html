@@ -2,6 +2,11 @@
     <div class="title">
         <span>{{ program?.Name }}</span>
     </div>
+
+    <textarea
+        id="Description"
+        class="program-description"
+        *ngIf="program.Description">{{ program?.Description }}</textarea>
 </div>
 
 <div class="program-details">
@@ -23,4 +28,5 @@
             <p>{{ exercise?.Weight }}</p>
         </li>
     </ul>
+    
 </div>

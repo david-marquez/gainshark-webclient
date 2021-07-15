@@ -1,5 +1,6 @@
 import { IExercise } from "../Interfaces/IExercise";
 import { IMuscleGroup } from "../Interfaces/IMuscleGroup";
+import { MuscleGroup } from "./MuscleGroup";
 
 export class Exercise implements IExercise {
     Id: number;
@@ -11,5 +12,5 @@ export class Exercise implements IExercise {
     Sets: number;
     Duration: number;
     Weight: number;
-    MuscleGroups: IMuscleGroup[];
+    MuscleGroups: IMuscleGroup[] = new Array<MuscleGroup>();
 }

@@ -5,6 +5,7 @@ import { catchError, retry } from 'rxjs/operators';
 
 import { IUser } from 'src/app/Interfaces/IUser';
 import { IProgram } from 'src/app/Interfaces/IProgram';
+import { IExercise } from 'src/app/Interfaces/IExercise';
 
 
 @Injectable({
@@ -15,8 +16,10 @@ export class ApiService {
   constructor(private http: HttpClient) { }
 
   baseUri: string = 'http://localhost:61795/api';
-  userUri: string = `${this.baseUri}/users`;
+  exerciseUri: string = `${this.baseUri}/exercises`;
   programUri: string = `${this.baseUri}/programs`;
+  userUri: string = `${this.baseUri}/users`;
+  
 
   private handleError(error: HttpErrorResponse) {
     if(error.status == 0) {
@@ -30,30 +33,78 @@ export class ApiService {
   }
 
   private createToken(username: string, password: string) {
+    // TODO: Move token from user+pass to auth token handoff service
     return btoa(`${username}:${password}`);
   }
 
+  addProgram(program: IProgram): Observable<any> {
+    // Token creation
+    // let token = doWork();
+    
+    let addUri = `${this.programUri}/add`;
+
+    let httpOptions = {
+      headers: new HttpHeaders()
+        .set('Content-Type', 'application/json')
+        //.set('Authorization', `Basic ${token}`)
+    }
+
+    return this.http.post<any>(
+      addUri, program, { observe: 'response', headers: httpOptions.headers })
+        .pipe(
+          retry(3),
+          catchError(this.handleError)
+        );
+  }
+
   addUser(user: IUser): Observable<any> {
+    // Token creation
+    // let token = doWork();
+
     let addUri = `${this.userUri}/add`;
+
+    let httpOptions = {
+      headers: new HttpHeaders()
+        .set('Content-Type', 'application/json')
+        //.set('Authorization', `Basic ${token}`)
+    }
 
     user.Password = btoa(user.Password);
 
     return this.http.post<any>(
-      addUri, user, { observe: 'response' })
-      .pipe(
-        retry(3),
-        catchError(this.handleError)
-      );
+      addUri, user, { observe: 'response', headers: httpOptions.headers })
+        .pipe(
+          retry(3),
+          catchError(this.handleError)
+        );
+  }
+
+  getExercises(): Observable<HttpResponse<IExercise[]>> {
+    // Token creation
+    // let token = doWork();
+
+    let httpOptions = {
+      headers: new HttpHeaders()
+        .set('Content-Type', 'application/json')
+        //.set('Authorization', `Basic ${token}`)
+    }
+
+    return this.http.get<IExercise[]>(
+      this.exerciseUri, { observe: 'response', headers: httpOptions.headers })
+        .pipe(
+          retry(3),
+          catchError(this.handleError)
+        );
   }
 
   getProgram(programId: number, userName: string, password: string): Observable<HttpResponse<IProgram>> {
     
-    let token = this.createToken(userName, password);
+    //let token = this.createToken(userName, password);
     
     let httpOptions = {
       headers: new HttpHeaders()
         .set('Content-Type', 'application/json')
-        .set('Authorization', `Basic ${token}`)
+        //.set('Authorization', `Basic ${token}`)
     }
 
     let getUri = `${this.programUri}/${programId}`;
@@ -71,6 +122,7 @@ export class ApiService {
     let httpOptions = {
       headers: new HttpHeaders()
         .set('Content-Type', 'application/json')
+        //.set('Authorization', `Basic ${token}`)
     }
 
     let getUri = `${this.userUri}/${userName}`;

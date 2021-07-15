@@ -1,6 +1,8 @@
 import { IProgram } from "../Interfaces/IProgram";
 import { IRole } from "../Interfaces/IRole";
 import { IUser } from "../Interfaces/IUser";
+import { Program } from "./Program";
+import { Role } from "./Role";
 
 export class User implements IUser {
     Id: number;
@@ -9,6 +11,6 @@ export class User implements IUser {
     UserName: string;
     Email: string;
     Password: string;
-    Role: IRole;
-    Programs: IProgram[];
+    Role: IRole = new Role();
+    Programs: IProgram[] = new Array<Program>();
 }

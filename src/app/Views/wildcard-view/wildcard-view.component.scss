@@ -1,0 +1,60 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.view-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 75vh;
+
+    .logo-container {
+        display: block;
+    }
+
+    .message-container {
+
+        .header{
+            font-size: 2.5em;
+            font-weight: 600;
+            display: flex;
+            height: 100%;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: .5em;
+            color: rgb(77, 77, 77);
+        }
+
+        .sub-header {
+            font-size: 1.25em;
+            font-weight: 500;
+            display: flex;
+            justify-content: center;
+            margin-bottom: .5em;
+            color: rgb(122, 122, 122);
+        }
+
+        .message {
+            font-size: 1em;
+            font-weight: 400;
+            display: flex;
+            justify-content: center;
+            color: rgb(77, 77, 77);
+            margin-bottom: .5em;
+        }
+
+        .redirect-link {
+            text-decoration: none;
+            display: flex;
+            justify-content: center;
+            color: rgb(43, 204, 216);
+        }
+
+        .redirect-link:hover {
+            text-decoration: underline;
+            cursor: pointer;
+        }
+    }
+}

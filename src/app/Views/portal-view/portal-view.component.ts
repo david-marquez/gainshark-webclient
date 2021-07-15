@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import { IUser } from 'src/app/Interfaces/IUser';
 import { ApiService } from 'src/app/Services/api-service/api-service.service';
@@ -17,7 +17,8 @@ export class PortalViewComponent implements OnInit {
 
   constructor(private route: ActivatedRoute, 
     private api: ApiService,
-    private userHandoff: UserHandoffService) { }
+    private userHandoff: UserHandoffService,
+    private router: Router) { }
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
@@ -28,6 +29,10 @@ export class PortalViewComponent implements OnInit {
       this.user = response.body;
       this.userHandoff.changeUser(response.body);
     });
+  }
+
+  navHome() {
+    this.router.navigate([`/portal/${this.username}/programs`]);
   }
 
 }
