@@ -1,14 +1,20 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormGroup, FormControl } from '@angular/forms';
+import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 
+// Interfaces imports
 import { IUser } from '../../Interfaces/IUser';
-import { ApiService } from '../../Services/api-service/api-service.service';
-import { HttpResponse } from '@angular/common/http';
-import { UserHandoffService } from 'src/app/Services/user-handoff-service/user-handoff-service.service';
+import { IProgram } from 'src/app/Interfaces/IProgram';
+
+// Models imports
 import { Role } from 'src/app/Models/Role';
 import { User } from 'src/app/Models/User';
-import { IProgram } from 'src/app/Interfaces/IProgram';
+
+// Services imports
+import { ApiService } from '../../Services/api-service/api-service.service';
+import { UserHandoffService } from 'src/app/Services/user-handoff-service/user-handoff-service.service';
+import { AuthorizationService } from 'src/app/Services/authorization-service/authorization-service.service';
 
 @Component({
   selector: 'app-login-view',
@@ -19,16 +25,15 @@ export class LoginViewComponent implements OnInit {
 
   private isNewUser: boolean = false;
   user: IUser = new User();
-  loginAlertMessage: string = undefined;
+  loginAlertMessage: string;
 
   constructor(private api: ApiService, 
-    private router: Router, 
-    private userHandoff: UserHandoffService) { }
+    private router: Router,
+    private userHandoff: UserHandoffService,
+    private authorization: AuthorizationService) { }
 
   ngOnInit(): void {
-    this.userHandoff.currentUser.subscribe(user => {
-      this.user = user;
-    });
+
   }
 
   buildUser(data) {
@@ -42,34 +47,18 @@ export class LoginViewComponent implements OnInit {
   }
 
   demoLogin() {
-    this.user.UserName = 'd_marquez';
+    this.user.UserName = 'GainShark';
+    this.user.Password = 'GainShark!';
 
-    this.api.getUser(this.user.UserName)
-      .subscribe(response => {
-        this.processLoginResponse(response);
-      });
+    this.authorization.login(this.user.UserName, this.user.Password);
+    this.router.navigate([`portal/${this.user.UserName}/programs`]);
   }
 
   login(data) {
     this.buildUser(data);
 
-    this.api.loginUser(this.user.UserName, this.user.Password)
-      .subscribe(response => {
-        this.processLoginResponse(response);
-      });
-  }
-
-  processLoginResponse(response: HttpResponse<IUser>) {
-    if(response.status == 200) {
-      this.userHandoff.changeUser(this.user);
-      this.router.navigate([`portal/${this.user.UserName}/programs`]);
-    }
-    else if(response.status == 401) {
-      this.loginAlertMessage = 'Invalid UserName or password';
-    }
-    else {
-      this.loginAlertMessage = 'Error logging in, please try again';
-    }
+    this.authorization.login(this.user.UserName, this.user.Password);
+    this.router.navigate([`portal/${this.user.UserName}/programs`]);
   }
 
   signUp(data) {
@@ -91,9 +80,10 @@ export class LoginViewComponent implements OnInit {
         .subscribe(response => {
           if(response.status == 409) {
             this.loginAlertMessage = 'Account already exists';
+            console.log(this.loginAlertMessage);
           }
           else {
-            this.processLoginResponse(response);
+            this.router.navigate([`portal/${this.user.UserName}/programs`]);
           }
         });
     }

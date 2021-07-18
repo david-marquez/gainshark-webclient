@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 
@@ -14,6 +14,8 @@ import { AddProgramComponent } from './Components/add-program/add-program.compon
 
 import { GenericFilterPipe } from './Pipes/generic-filter.pipe';
 import { WildcardViewComponent } from './Views/wildcard-view/wildcard-view.component';
+
+import { AuthenticationInterceptor } from './Interceptors/authentication-interceptor.service';
 
 @NgModule({
   declarations: [
@@ -32,7 +34,9 @@ import { WildcardViewComponent } from './Views/wildcard-view/wildcard-view.compo
     FormsModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: AuthenticationInterceptor, multi: true }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

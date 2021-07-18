@@ -67,9 +67,9 @@ export class AddProgramComponent implements OnInit {
 
     // POST the user via the program api request
     console.log(this.program);
-    //this.api.addProgram(this.program).subscribe(response => {
-      //console.log(response.body);
-    //});
+    this.api.addProgram(this.program).subscribe(response => {
+      console.log(response.body);
+    });
   }
 
   addExercise(exercise: IExercise) {

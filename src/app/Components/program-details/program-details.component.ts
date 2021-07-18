@@ -31,9 +31,7 @@ export class ProgramDetailsComponent implements OnInit {
     });
 
     // API call for program details
-    this.api.getProgram(this.program.Id, 
-      this.user.UserName, 
-      this.user.Password).subscribe(response => {
+    this.api.getProgram(this.program.Id).subscribe(response => {
         this.program = response.body;
       });
     
