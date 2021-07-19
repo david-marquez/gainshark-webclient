@@ -6,6 +6,33 @@
             Hi, {{ user?.UserName }}
         </span>
     </div>
+
+    <div 
+        class="menu-icon"
+        (click)="toggleDropdown();">
+        <i class="fa fa-bars toggle-icon"></i>
+    </div>
+    
+</div>
+<div 
+    id="dropdown-menu"
+    class="dropdown-menu"
+    hidden>
+    <ul class="menu-items">
+        <li 
+            id="btn-sign-out"
+            class="menu-item"
+            (click)="signOut();">
+            <i class="fa fa-sign-out item-icon"></i>
+        </li>
+        <!--
+        <li
+            id="btn-account"
+            class="menu-item"
+            (click)="navAccount();">
+            <i class="fa fa-user item-icon"></i>
+        </li>-->
+    </ul>
 </div>
 
 <div class="portal-content">

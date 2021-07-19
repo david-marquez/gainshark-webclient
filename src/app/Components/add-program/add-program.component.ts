@@ -6,10 +6,13 @@ import { IProgram } from 'src/app/Interfaces/IProgram';
 import { IUser } from 'src/app/Interfaces/IUser';
 import { Exercise } from 'src/app/Models/Exercise';
 import { Program } from 'src/app/Models/Program';
+import { Router } from '@angular/router';
+
 
 // Services imports
 import { ApiService } from 'src/app/Services/api-service/api-service.service';
 import { UserHandoffService } from 'src/app/Services/user-handoff-service/user-handoff-service.service';
+import { AuthorizationService } from 'src/app/Services/authorization-service/authorization-service.service';
 
 // Pipes imports
 import { GenericFilterPipe } from 'src/app/Pipes/generic-filter.pipe';
@@ -27,9 +30,22 @@ export class AddProgramComponent implements OnInit {
   exerciseFilter: any = '';
 
   constructor(private api: ApiService,
-    private userHandoff: UserHandoffService) { }
+    private userHandoff: UserHandoffService,
+    private authorization: AuthorizationService,
+    private router: Router) { }
 
   ngOnInit(): void {
+    if(!this.authorization.isLoggedIn) {
+      window.alert('Session expired. Returning to login');
+      this.router.navigate(['/login']);
+    }
+    else {
+      this.loadResources();
+    }
+
+  }
+
+  loadResources() {
     // Fetch exercises and set on init
     this.api.getExercises().subscribe(response => {
       this.availableExercises = response.body;

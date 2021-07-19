@@ -18,9 +18,8 @@ export class AuthorizationService {
 
     // Variable declarations
     let loginUrl: string = 'http://localhost:61795/api/token';
-    let encodedPassword: string = btoa(password);
-    let urlTokenRequest = `username=${username}&password=${encodedPassword}&grant_type=password`;
-
+    let urlTokenRequest = `username=${username}&password=${password}&grant_type=password`;
+    
     // Set headers
     let httpOptions = {
       headers: new HttpHeaders()
@@ -36,7 +35,6 @@ export class AuthorizationService {
   }
 
   private setSession(authResult: IAccessToken) {
-    console.log(authResult);
     let expiresAt = moment().add(authResult.expires_in, 'second');
 
     localStorage.setItem('access_token', authResult.access_token);

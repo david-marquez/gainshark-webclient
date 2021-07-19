@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormGroup, FormControl } from '@angular/forms';
-import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 
 // Interfaces imports
 import { IUser } from '../../Interfaces/IUser';
@@ -13,7 +12,6 @@ import { User } from 'src/app/Models/User';
 
 // Services imports
 import { ApiService } from '../../Services/api-service/api-service.service';
-import { UserHandoffService } from 'src/app/Services/user-handoff-service/user-handoff-service.service';
 import { AuthorizationService } from 'src/app/Services/authorization-service/authorization-service.service';
 
 @Component({
@@ -25,15 +23,13 @@ export class LoginViewComponent implements OnInit {
 
   private isNewUser: boolean = false;
   user: IUser = new User();
-  loginAlertMessage: string;
 
   constructor(private api: ApiService, 
     private router: Router,
-    private userHandoff: UserHandoffService,
     private authorization: AuthorizationService) { }
 
   ngOnInit(): void {
-
+    
   }
 
   buildUser(data) {
@@ -43,22 +39,35 @@ export class LoginViewComponent implements OnInit {
     this.user.LastName = nameSplit[1];
     this.user.Email = data.value.email;
     this.user.UserName = data.value.userName;
-    this.user.Password = data.value.password;
+    this.user.Password = btoa(data.value.password);
   }
 
   demoLogin() {
+    this.user.FirstName = null;
+    this.user.LastName = null;
+    this.user.Email = null;
     this.user.UserName = 'GainShark';
-    this.user.Password = 'GainShark!';
+    this.user.Password = btoa('GainShark!');
 
-    this.authorization.login(this.user.UserName, this.user.Password);
-    this.router.navigate([`portal/${this.user.UserName}/programs`]);
+    this.login();
   }
 
-  login(data) {
-    this.buildUser(data);
+  login(data?) {
+    if(data) {
+      this.buildUser(data)
+    }
 
-    this.authorization.login(this.user.UserName, this.user.Password);
-    this.router.navigate([`portal/${this.user.UserName}/programs`]);
+    if(!this.user.UserName || !this.user.Password) {
+      window.alert('Please enter a username and password');
+    }
+    else {
+      this.authorization.login(this.user.UserName, this.user.Password).subscribe(
+        response => {
+            this.router.navigate([`portal/${this.user.UserName}/programs`]);
+        }
+      )
+    }
+    
   }
 
   signUp(data) {
@@ -74,18 +83,18 @@ export class LoginViewComponent implements OnInit {
       this.user.Role.Id = 1;
 
       this.user.Programs = new Array<IProgram>();
-
-      // Do sign up stuff
-      this.api.addUser(this.user)
-        .subscribe(response => {
-          if(response.status == 409) {
-            this.loginAlertMessage = 'Account already exists';
-            console.log(this.loginAlertMessage);
-          }
-          else {
-            this.router.navigate([`portal/${this.user.UserName}/programs`]);
-          }
-        });
+      
+      if(!this.user.UserName || !this.user.Password) {
+        window.alert('Please enter a username and password');
+      }
+      else{
+        // Do sign up stuff
+        this.api.addUser(this.user)
+          .subscribe(response => {
+            this.login();
+          });
+      }
+      
     }
   }
 

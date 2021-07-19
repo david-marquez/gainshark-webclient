@@ -15,7 +15,8 @@ import { AddProgramComponent } from './Components/add-program/add-program.compon
 import { GenericFilterPipe } from './Pipes/generic-filter.pipe';
 import { WildcardViewComponent } from './Views/wildcard-view/wildcard-view.component';
 
-import { AuthenticationInterceptor } from './Interceptors/authentication-interceptor.service';
+import { AuthenticateInterceptor } from './Interceptors/authentication/authenticate.interceptor';
+import { HttpErrorInterceptor } from './Interceptors/http-error/http-error.interceptor';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { AuthenticationInterceptor } from './Interceptors/authentication-interce
     HttpClientModule
   ],
   providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: AuthenticationInterceptor, multi: true }
+    { provide: HTTP_INTERCEPTORS, useClass: AuthenticateInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: HttpErrorInterceptor, multi: true }
   ],
   bootstrap: [AppComponent]
 })

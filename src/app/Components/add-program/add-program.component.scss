@@ -16,7 +16,7 @@ button:focus {
 
 .header-bar {
     display: grid;
-    grid-template-columns: auto 7.5em;
+    grid-template-columns: 75% 25%;
     row-gap: 1em;
     margin-bottom: 1em;
     border: solid;
@@ -35,6 +35,8 @@ button:focus {
     }
 
     .btn-create-program {
+        width: 7.5em;
+        padding: .5em;
         border-radius: 1px;
         border-style: none;
         height: 2.5em;
@@ -58,6 +60,7 @@ button:focus {
         font-family: 'Roboto', sans-serif;
         font-size: 1em;
         padding-bottom: .5em;
+        grid-column: 1/-1;
     }
 
     .program-description:focus {

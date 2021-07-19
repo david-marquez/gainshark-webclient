@@ -15,7 +15,7 @@
     .title {
         line-height: 1.5em;
         font-size: 1.5em;
-        margin-bottom: 1em;
+        margin-bottom: .5em;
     }
 
     .program-description {
@@ -24,6 +24,7 @@
         font-family: 'Roboto', sans-serif;
         font-size: 1em;
         padding-bottom: .5em;
+        width: 100%;
     }
 
     .program-description:focus {

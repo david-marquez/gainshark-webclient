@@ -21,78 +21,38 @@ export class ApiService {
   programUrl: string = `${this.baseUrl}/programs`;
   userUrl: string = `${this.baseUrl}/users`;
 
-  private handleError(error: HttpErrorResponse) {
-    if(error.status == 0) {
-      console.error('An error occurred: ', error.error);
-    }
-    else if(error.status == 401) {
-      // Refresh token
-      
-    }
-    else {
-      console.error(`Error code ${error.status}, ${error.message}`);
-    }
-
-    return throwError(error);
-  }
-
   addProgram(program: IProgram): Observable<any> {
-    
     let addUri = `${this.programUrl}/add`;
 
     return this.http.post<any>(
-      addUri, program, { observe: 'response' })
-        .pipe(
-          retry(3),
-          catchError(this.handleError)
-        );
+      addUri, program, { observe: 'response' });
   }
 
   addUser(user: IUser): Observable<any> {
-
     let addUri = `${this.userUrl}/add`;
 
     user.Password = btoa(user.Password);
 
     return this.http.post<any>(
-      addUri, user, { observe: 'response' })
-        .pipe(
-          retry(3),
-          catchError(this.handleError)
-        );
+      addUri, user, { observe: 'response' });
   }
 
   getExercises(): Observable<HttpResponse<IExercise[]>> {
-
     return this.http.get<IExercise[]>(
-      this.exerciseUrl, { observe: 'response' })
-        .pipe(
-          retry(3),
-          catchError(this.handleError)
-        );
+      this.exerciseUrl, { observe: 'response' });
   }
 
   getProgram(programId: number): Observable<HttpResponse<IProgram>> {
-
     let getUri = `${this.programUrl}/${programId}`;
 
     return this.http.get<IProgram>(
-      getUri, { observe: 'response' })
-        .pipe(
-          retry(3),
-          catchError(this.handleError)
-        );
+      getUri, { observe: 'response' });
   }
 
   getUser(userName: string): Observable<HttpResponse<IUser>> {
-
     let getUri = `${this.userUrl}/${userName}`;
 
-    return this.http.get<IUser>(getUri, { observe: 'response' })
-      .pipe(
-        retry(3),
-        catchError(this.handleError)
-      );
+    return this.http.get<IUser>(getUri, { observe: 'response' });
     
   }
   
