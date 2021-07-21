@@ -4,52 +4,38 @@
     box-sizing: border-box;
 }
 
-.header-bar {
-    margin-bottom: 1em;
-    border: solid;
-    border-width: 0;
-    border-bottom-width: 1px;
-    border-color: rgb(67, 203, 212);
-    padding-bottom: .5em;
+.btn-grid {
+    margin-top: 2em;
+    display: grid;
+    grid-template-columns: auto auto;
 
-    .title {
-        line-height: 1.5em;
-        font-size: 1.5em;
-        margin-bottom: .5em;
-    }
-
-    .program-description {
-        resize: none;
-        border-style: none;
-        font-family: 'Roboto', sans-serif;
+    .btn {
+        width: 10em;
+        height: 2.5em;
         font-size: 1em;
-        padding-bottom: .5em;
-        width: 100%;
+        font-weight: 600;
+        border-radius: 5px;
+        border-style: none;
+        background: rgb(235, 235, 235);
+        justify-content: center;
+        align-items: center;
+        border: 1px solid rgb(211, 211, 211);
     }
 
-    .program-description:focus {
-        outline: none;
+    .btn:hover {
+        cursor: pointer;
+        background: rgb(211, 211, 211);
     }
-}
 
-.program-details {
+    .btn-update-program {
+        display: flex;
+        justify-self: flex-end;
+        background: rgb(83, 234, 245);
+        border: 1px solid rgb(83, 234, 245);
+    }
 
-    .exercise-container {
-
-        .exercise-card {
-            list-style-type: none;
-            display: grid;
-            grid-template-columns: 40% 20% 20% 20%;
-            margin-bottom: .75em;
-        }
-
-        .exercise-header {
-            margin-bottom: 1em;
-            border: solid;
-            border-width: 0;
-            border-bottom-width: 1px;
-            border-color: rgb(211, 211, 211);
-            padding-bottom: .25em;
-        }
+    .btn-update-program:hover{
+        background: rgb(67, 203, 212);
+        border: rgb(67, 203, 212);
     }
 }

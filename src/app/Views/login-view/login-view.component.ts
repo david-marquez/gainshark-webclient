@@ -33,10 +33,22 @@ export class LoginViewComponent implements OnInit {
   }
 
   buildUser(data) {
-    let nameSplit = data.value.name.split(" ");
+    let nameSplit: string[] = data.value.name.split(" ");
 
-    this.user.FirstName = nameSplit[0];
-    this.user.LastName = nameSplit[1];
+    if(nameSplit[0]) {
+      this.user.FirstName = nameSplit[0];
+    }
+    else {
+      this.user.FirstName = '';
+    }
+
+    if(nameSplit[1]) {
+      this.user.LastName = nameSplit[1];
+    }
+    else {
+      this.user.LastName = '';
+    }
+
     this.user.Email = data.value.email;
     this.user.UserName = data.value.userName;
     this.user.Password = btoa(data.value.password);
@@ -46,8 +58,8 @@ export class LoginViewComponent implements OnInit {
     this.user.FirstName = null;
     this.user.LastName = null;
     this.user.Email = null;
-    this.user.UserName = 'GainShark';
-    this.user.Password = btoa('GainShark!');
+    this.user.UserName = 'demo_user';
+    this.user.Password = 'R2ExbiRoYXJrRDNtMFBhc3N3MHJkIQ==';
 
     this.login();
   }
@@ -62,7 +74,7 @@ export class LoginViewComponent implements OnInit {
     }
     else {
       this.authorization.login(this.user.UserName, this.user.Password).subscribe(
-        response => {
+        () => {
             this.router.navigate([`portal/${this.user.UserName}/programs`]);
         }
       )
@@ -84,13 +96,13 @@ export class LoginViewComponent implements OnInit {
 
       this.user.Programs = new Array<IProgram>();
       
-      if(!this.user.UserName || !this.user.Password) {
-        window.alert('Please enter a username and password');
+      if(!this.user.UserName || !this.user.Password || !this.user.Email) {
+        window.alert('Please enter a username, password, and email address');
       }
       else{
         // Do sign up stuff
         this.api.addUser(this.user)
-          .subscribe(response => {
+          .subscribe(() => {
             this.login();
           });
       }

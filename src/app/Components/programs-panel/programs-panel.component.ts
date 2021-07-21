@@ -26,13 +26,12 @@ export class ProgramsPanelComponent implements OnInit {
     else {
       this.loadResources();
     }
-    
   }
 
   loadResources() {
     this.userHandoff.currentUser.subscribe(data => {
       this.user = data;
     });
-  }
+  }z
 
 }

@@ -8,4 +8,5 @@ export class Program implements IProgram {
     Name: string;
     Description: string;
     Exercises: IExercise[] = new Array<Exercise>();
+    DateCreated: string;
 }

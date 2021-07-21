@@ -1,0 +1,78 @@
+<div class="program-container">
+
+    <div class="header-bar">
+        <div class="title">
+            <input
+                name="Name"
+                id="Name"
+                type="text"
+                class="login-input header-input form-control"
+                placeholder="Program Name"
+                required
+                value="{{ program?.Name }}">
+        </div>
+        
+        <textarea
+            id="Description"
+            class="program-description"
+            placeholder="Program Description"
+            rows="2"
+            value="{{ program?.Description }}"></textarea>
+    </div>
+    
+    <div 
+        id="program-details"
+        class="program-details">
+    
+        <div class="exercise-card exercise-header">
+            <p></p>
+            <p>Exercise</p>
+            <p>Sets</p>
+            <p>Reps</p>
+            <p>Weight</p>
+        </div>
+    
+        <ul class="exercise-container">    
+            <li 
+                class="exercise-card program-exercise"
+                *ngFor="let programExercise of program.Exercises">
+                <div
+                    class="delete-exercise"
+                    (click)="deleteExercise(programExercise);">
+                    <i class="fa fa-trash"></i>
+                </div>
+                <p 
+                    class="exercise-field program-exercise-name"
+                    name="exercise-name">
+                    {{ programExercise?.Name }}
+                </p>
+                <input 
+                    class="exercise-field exercise-input program-exercise-sets"
+                    name="exercise-sets"
+                    type="text"
+                    pattern="[0-9]*"
+                    inputmode="numeric"
+                    placeholder="Sets"
+                    value="{{ programExercise?.Sets }}">
+                <input 
+                    class="exercise-field exercise-input program-exerecise-reps"
+                    name="exercise-reps"
+                    type="text"
+                    pattern="[0-9]*"
+                    inputmode="numeric"
+                    placeholder="Reps"
+                    value="{{ programExercise?.Reps }}">
+                <input 
+                    class="exercise-field exercise-input program-exercise-weight"
+                    name="exercise-weight"
+                    type="text"
+                    pattern="[0-9]*"
+                    inputmode="numeric"
+                    placeholder="Weight"
+                    value="{{ programExercise?.Weight }}">
+            </li>
+        </ul>
+    
+    </div>
+
+</div>

@@ -1,62 +1,8 @@
-<div class="header-bar">
-    <div class="title">
-        <input
-            name="Name"
-            id="Name"
-            type="text"
-            class="login-input header-input form-control"
-            placeholder="Program Name"
-            required>
-    </div>
-
-    <button
-        id="btn-create-program"
-        class="btn btn-create-program"
-        type="submit"
-        (click)="createProgram();">
-        Create Program
-    </button>
-    
-    <textarea
-        id="Description"
-        class="program-description"
-        placeholder="Program Description"
-        rows="3"></textarea>
-</div>
-
-<div 
-    id="program-details"
-    class="program-details">
-
-    <div class="exercise-card exercise-header">
-        <p>Exercise</p>
-        <p>Sets</p>
-        <p>Reps</p>
-        <p>Weight</p>
-    </div>
-
-    <ul class="exercise-container">    
-        <li 
-          *ngFor="let programExercise of program.Exercises" 
-          class="exercise-card program-exercise">
-            <p class="exercise-field program-exercise-name">
-                {{ programExercise?.Name }}
-            </p>
-            <input 
-                class="exercise-field exercise-input program-exercise-sets"
-                type="number"
-                placeholder="Sets">
-            <input 
-                class="exercise-field exercise-input program-exerecise-reps"
-                type="number"
-                placeholder="Reps">
-            <input 
-                class="exercise-field exercise-input program-exercise-weight"
-                type="number"
-                placeholder="Weight">
-        </li>
-    </ul>
-
+<div class="program">
+    <app-program-item 
+        [program]="program" 
+        (deleteExerciseEvent)="deleteExercise($event)">
+    </app-program-item>
 </div>
 
 <div class="add-exercise-container">
@@ -83,12 +29,21 @@
             </li>
         </ul>
     </div>
+</div>
 
+<div class="btn-grid">
     <button
         id="btn-add-exercise"
         class="btn btn-add-exercise"
         type="button"
         (click)="showExerciseList()">
         Add Exercise
+    </button>
+    <button
+        id="btn-create-program"
+        class="btn btn-create-program"
+        (click)="createProgram();"
+        type="button">
+        Create Program
     </button>
 </div>

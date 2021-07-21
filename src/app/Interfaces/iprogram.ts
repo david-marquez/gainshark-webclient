@@ -5,5 +5,6 @@ export interface IProgram {
     UserId: number,
     Name: string,
     Description: string,
-    Exercises: IExercise[]
+    Exercises: IExercise[],
+    DateCreated: string
 }

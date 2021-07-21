@@ -14,94 +14,6 @@ button:focus {
     outline: none;
 }
 
-.header-bar {
-    display: grid;
-    grid-template-columns: 75% 25%;
-    row-gap: 1em;
-    margin-bottom: 1em;
-    border: solid;
-    border-width: 0 0 1px 0;
-    border-color: rgb(67, 203, 212);
-    padding-bottom: .5em;
-
-    .title {
-        line-height: 1.5em;
-        font-size: 1.5em;
-
-        .header-input {
-            font-size: 1em;
-            border: none;
-        }
-    }
-
-    .btn-create-program {
-        width: 7.5em;
-        padding: .5em;
-        border-radius: 1px;
-        border-style: none;
-        height: 2.5em;
-        width: 100%;
-        display: flex;
-        justify-self: end;
-        justify-content: center;
-        align-self: center;
-        align-items: center;
-        background: rgb(235, 235, 235);
-    }
-
-    .btn-create-program:hover {
-        cursor: pointer;
-        background: rgb(211, 211, 211);
-    }
-
-    .program-description {
-        resize: none;
-        border-style: none;
-        font-family: 'Roboto', sans-serif;
-        font-size: 1em;
-        padding-bottom: .5em;
-        grid-column: 1/-1;
-    }
-
-    .program-description:focus {
-        outline: none;
-    }
-}
-
-.program-details {
-    
-    .exercise-header {
-        display: grid;
-        grid-template-columns: 40% 20% 20% 20%;
-        margin-bottom: 1em;
-        border: solid;
-        border-width: 0;
-        border-bottom-width: 1px;
-        border-color: rgb(211, 211, 211);
-        padding-bottom: 1em;
-    }
-
-    .exercise-container {
-
-        .exercise-card {
-            list-style-type: none;
-            display: grid;
-            grid-template-columns: 40% 20% 20% 20%;
-            margin-bottom: 1em;
-            font-size: 1em;
-
-            .exercise-field {
-                padding-right: 1em;
-            }
-
-            .exercise-input {
-                border: none;
-                font-size: 1em;
-            }
-        }
-    }
-}
-
 .add-exercise-container {
 
     .search-container {
@@ -143,10 +55,48 @@ button:focus {
         border-radius: 1px;
         border-style: none;
         background: rgb(235, 235, 235);
+        font-size: 1em;
+        border: 1px solid rgb(211, 211, 211);
     }
 
     .btn-add-exercise:hover {
         cursor: pointer;
         background: rgb(211, 211, 211);
+    }
+}
+
+.btn-grid {
+    margin-top: 2em;
+    display: grid;
+    grid-template-columns: auto auto;
+
+    .btn {
+        width: 10em;
+        height: 2.5em;
+        font-size: 1em;
+        font-weight: 600;
+        border-style: none;
+        background: rgb(235, 235, 235);
+        justify-content: center;
+        align-items: center;
+        font-size: 1em;
+        border: 1px solid rgb(211, 211, 211);
+    }
+
+    .btn:hover {
+        cursor: pointer;
+        background: rgb(211, 211, 211);
+    }
+
+    .btn-create-program {
+        display: flex;
+        justify-self: flex-end;
+        background: rgb(83, 234, 245);
+        border: 1px solid rgb(83, 234, 245);
+    }
+
+    .btn-create-program:hover {
+        background: rgb(67, 203, 212);
+        border: rgb(67, 203, 212);
     }
 }

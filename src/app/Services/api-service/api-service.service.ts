@@ -21,39 +21,52 @@ export class ApiService {
   programUrl: string = `${this.baseUrl}/programs`;
   userUrl: string = `${this.baseUrl}/users`;
 
-  addProgram(program: IProgram): Observable<any> {
-    let addUri = `${this.programUrl}/add`;
+  // Add item methods
 
-    return this.http.post<any>(
-      addUri, program, { observe: 'response' });
+  addProgram(program: IProgram): Observable<any> {
+    let addUrl = `${this.programUrl}/add`;
+
+    return this.http.post<any>(addUrl, program, { observe: 'response' });
   }
 
   addUser(user: IUser): Observable<any> {
-    let addUri = `${this.userUrl}/add`;
+    let addUrl = `${this.userUrl}/add`;
 
-    user.Password = btoa(user.Password);
-
-    return this.http.post<any>(
-      addUri, user, { observe: 'response' });
+    return this.http.post<any>(addUrl, user, { observe: 'response' });
   }
 
+  // Delete item methods
+
+  deleteProgram(programId: number): Observable<any> {
+    let deleteUrl = `${this.programUrl}/delete/${programId}`;
+
+    return this.http.post<any>(deleteUrl, programId, { observe: 'response' });
+  }
+
+  // Get item methods
+
   getExercises(): Observable<HttpResponse<IExercise[]>> {
-    return this.http.get<IExercise[]>(
-      this.exerciseUrl, { observe: 'response' });
+    return this.http.get<IExercise[]>(this.exerciseUrl, { observe: 'response' });
   }
 
   getProgram(programId: number): Observable<HttpResponse<IProgram>> {
-    let getUri = `${this.programUrl}/${programId}`;
+    let getUrl = `${this.programUrl}/${programId}`;
 
-    return this.http.get<IProgram>(
-      getUri, { observe: 'response' });
+    return this.http.get<IProgram>(getUrl, { observe: 'response' });
   }
 
   getUser(userName: string): Observable<HttpResponse<IUser>> {
-    let getUri = `${this.userUrl}/${userName}`;
+    let getUrl = `${this.userUrl}/${userName}`;
 
-    return this.http.get<IUser>(getUri, { observe: 'response' });
-    
+    return this.http.get<IUser>(getUrl, { observe: 'response' });
+  }
+
+  // Update item methods
+
+  updateProgram(program: IProgram): Observable<any> {
+    let updateUrl = `${this.programUrl}/update`;
+
+    return this.http.post<any>(updateUrl, program, { observe: 'response' });
   }
   
 }

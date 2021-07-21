@@ -2,6 +2,9 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { registerLocaleData } from '@angular/common';
+import localeES from '@angular/common/locales/es';
+registerLocaleData(localeES, "es");
 
 import { AppRoutingModule } from './app-routing.module';
 
@@ -17,6 +20,7 @@ import { WildcardViewComponent } from './Views/wildcard-view/wildcard-view.compo
 
 import { AuthenticateInterceptor } from './Interceptors/authentication/authenticate.interceptor';
 import { HttpErrorInterceptor } from './Interceptors/http-error/http-error.interceptor';
+import { ProgramItemComponent } from './Components/program-item/program-item.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +31,8 @@ import { HttpErrorInterceptor } from './Interceptors/http-error/http-error.inter
     ProgramDetailsComponent,
     AddProgramComponent,
     GenericFilterPipe,
-    WildcardViewComponent
+    WildcardViewComponent,
+    ProgramItemComponent
   ],
   imports: [
     BrowserModule,
