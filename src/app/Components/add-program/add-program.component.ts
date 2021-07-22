@@ -113,7 +113,7 @@ export class AddProgramComponent implements OnInit {
       window.alert('This program must have at least one exercise')
     }
     else {
-      // POST the user via the program api request
+      // POST the program via the add api request
       this.api.addProgram(this.program).subscribe(() => {
         window.alert(`'${this.program.Name}' program created`);
         this.router.navigate([`/portal/${this.user.UserName}/programs`])

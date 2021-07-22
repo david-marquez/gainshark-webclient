@@ -74,6 +74,10 @@ export class ProgramDetailsComponent implements OnInit {
   }
 
   updateProgram() {
+        // Fetch HTML values for program update
+    this.program.Name = (document.getElementById('Name') as HTMLInputElement).value;
+    this.program.Description = (document.getElementById('Description') as HTMLInputElement).value;
+
     // Set the sets, reps, and weight for exercises
     let exercises = document.getElementsByClassName('program-exercise');
 
@@ -85,8 +89,8 @@ export class ProgramDetailsComponent implements OnInit {
             .value;
 
       // Retrieved exercise reps value
-      let reps = (exercises[i].
-        children
+      let reps = (exercises[i]
+        .children
           .namedItem('exercise-reps') as HTMLInputElement)
             .value;
 
@@ -107,11 +111,22 @@ export class ProgramDetailsComponent implements OnInit {
       this.program.Exercises[i].Position = (i+1);
     }
 
-    console.log(this.program);
-    this.api.updateProgram(this.program).subscribe(() => {
-      window.alert(`'${this.program.Name}' program updated`);
-      location.reload();
-    });
+    // Program validation checks
+    if(this.program.Name == '') {
+      window.alert('Please enter a program name')
+    }
+    else if(this.program.Exercises.length == 0) {
+      window.alert('This program must have at least one exercise')
+    }
+    else {
+      // POST the updated program via update the api request
+      this.api.updateProgram(this.program).subscribe(() => {
+        window.alert(`'${this.program.Name}' program updated`);
+        location.reload();
+      });
+    }
+
+    
   }
 
 }
